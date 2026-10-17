@@ -1,4 +1,4 @@
-import argparse
+﻿import argparse
 import sys
 
 from pipeline import common
@@ -37,8 +37,12 @@ def main(show_figures):
 
 
 if __name__ == "__main__":
+    sys.stdout.reconfigure(encoding="utf-8")   
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--show", action="store_true", help="open each figure in a window")
     main(parser.parse_args().show)
     if getattr(sys, "frozen", False):   # keeps the console window open when the .exe is double-clicked
-        input("\nPress Enter to close.")
+        try:
+            input("\nPress Enter to close.")
+        except EOFError:   
+            pass
