@@ -1,0 +1,10 @@
+{
+  "pool_nodules": 1533,
+  "pool_benign": 1068,
+  "pool_malignant": 465,
+  "patients_with_benign": 530,
+  "patients_with_malignant": 331,
+  "patients_with_both": 166,
+  "unique_patients": 695,
+  "balanced_ceiling": 662
+}
