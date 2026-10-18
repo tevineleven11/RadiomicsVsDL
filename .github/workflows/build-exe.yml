@@ -22,10 +22,10 @@ jobs:
 
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Python 3.13
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.13"
 
@@ -63,18 +63,13 @@ jobs:
       - name: Package the executable with its data
         run: |
           mkdir package\RadiomicsVsDL
-          copy RadiomicsVsDL.exe package\RadiomicsVsDL\
-          copy final_dataset_manifest.csv package\RadiomicsVsDL\
-          copy fold_splits.pkl package\RadiomicsVsDL\
-          copy README.md package\RadiomicsVsDL\
-          copy USER_MANUAL.md package\RadiomicsVsDL\
-          if exist LICENSE copy LICENSE package\RadiomicsVsDL\
-          xcopy /e /i /q results package\RadiomicsVsDL\results
-          xcopy /e /i /q preprocessed package\RadiomicsVsDL\preprocessed
+          for %%f in (RadiomicsVsDL.exe final_dataset_manifest.csv fold_splits.pkl README.md USER_MANUAL.md SOFTWARE_REPORT.md) do copy %%f package\RadiomicsVsDL\ || exit /b 1
+          xcopy /e /i /q results package\RadiomicsVsDL\results || exit /b 1
+          xcopy /e /i /q preprocessed package\RadiomicsVsDL\preprocessed || exit /b 1
           cd package && 7z a -tzip ..\RadiomicsVsDL-windows.zip RadiomicsVsDL > NUL
 
       - name: Keep the zip as a workflow artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: RadiomicsVsDL-windows
           path: RadiomicsVsDL-windows.zip
