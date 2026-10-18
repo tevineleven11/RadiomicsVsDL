@@ -1,7 +1,7 @@
 # Packages for run_pipeline.py (CPU only). 
 numpy==2.1.3
-pandas
-scipy
+pandas==3.0.6
+scipy==1.18.1
 scikit-learn==1.6.1
 MLstatkit==0.1.91
-matplotlib
+matplotlib==3.11.2
